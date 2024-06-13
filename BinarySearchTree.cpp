@@ -25,6 +25,6 @@ class BinaryTree
 
         BinaryTree()
         {
-            
+            ROOT = nullptr; // initializing root to null
         }
 }
