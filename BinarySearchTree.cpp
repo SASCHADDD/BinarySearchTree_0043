@@ -53,4 +53,58 @@ class BinaryTree
             parent->rightchild = newNode; // make the right child of the parent point to the new node
         }
     }
+
+    void search(string element, Node*& parent, Node*& currentNode)
+    {
+        // this function searches the currentnode of the specified node as well as the current node of its parent
+             currentNode = ROOT;
+             parent = NULL;
+             while ((currentNode !=NULL) && (currentNode->info != element))
+             {
+                parent = currentNode;
+                if (currentNode < currentNode->info)
+                    currentNode = currentNode->leftchild;
+                else 
+                    currentNode = currentNode->rightchild;
+             }
+    }
+    void inorder(Node* ptr)
+    {
+        if (ROOT == NULL)
+        {
+            cout << "Tree is empty" << endl;
+            return;
+        }
+        if (ptr != NULL)
+        {
+            inorder(ptr->leftchild);
+            cout << ptr->info <<  " ";
+            inorder(ptr->rightchild);
+        }
+    }
+    void preorder(Node* ptr)
+    {
+        if (ROOT == NULL)
+        {
+            cout << "Tree is empty" << endl;
+            return;
+        }
+        if (ptr !=NULL)
+        {
+            cout << ptr->info<<" ";
+            preorder(ptr->leftchild);
+            preorder(ptr->rightchild);
+        }
+    }
+
+    void postorder(Node* ptr)
+    {
+        // performs the postorder traversal of the tree
+        if (ROOT == NULL)
+        {
+            postorder(ptr->leftchild);
+            postorder(ptr->rightchild);
+            cout << ptr->info << " ";
+        }
+    }
 };
