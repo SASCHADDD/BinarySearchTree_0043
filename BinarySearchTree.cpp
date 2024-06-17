@@ -10,7 +10,7 @@ class Node
     Node* rightchild;
 
     // constructor for the node class
-    Node(string i, Node* l, Node* r),
+    Node(string i, Node* l, Node* r)
     {
         info = i;
         leftchild = l;
@@ -53,21 +53,20 @@ class BinaryTree
             parent->rightchild = newNode; // make the right child of the parent point to the new node
         }
     }
-
-    void search(string element, Node*& parent, Node*& currentNode)
+void search(string element, Node*& parent, Node*& currentNode)
+{
+    // this function searches the currentnode of the specified node as well as the current node of its parent
+    currentNode = ROOT;
+    parent = NULL;
+    while ((currentNode != NULL) && (currentNode->info != element))
     {
-        // this function searches the currentnode of the specified node as well as the current node of its parent
-             currentNode = ROOT;
-             parent = NULL;
-             while ((currentNode !=NULL) && (currentNode->info != element))
-             {
-                parent = currentNode;
-                if (currentNode < currentNode->info)
-                    currentNode = currentNode->leftchild;
-                else 
-                    currentNode = currentNode->rightchild;
-             }
+        parent = currentNode;
+        if (element < currentNode->info)
+            currentNode = currentNode->leftchild;
+        else 
+            currentNode = currentNode->rightchild;
     }
+}
     void inorder(Node* ptr)
     {
         if (ROOT == NULL)
@@ -97,16 +96,16 @@ class BinaryTree
         }
     }
 
-    void postorder(Node* ptr)
-    {
+   void postorder(Node* ptr)
+{
         // performs the postorder traversal of the tree
         if (ROOT == NULL)
         {
             cout << "Tree is empty" << endl;
             return;
         }
-        
-        if (ROOT == NULL)
+
+        if (ptr != NULL)
         {
             postorder(ptr->leftchild);
             postorder(ptr->rightchild);
@@ -114,3 +113,57 @@ class BinaryTree
         }
     }
 };
+
+int main ()
+{
+    BinaryTree obj;
+    while (true)
+    {
+        cout << "\nMenu" << endl;
+        cout << "1. Implement insert operation" << endl;
+        cout << "2. perform inorder traversal" << endl;
+        cout << "3. perform preorder traversal" << endl;
+        cout << "4. perform postorder traversal" << endl;
+        cout << "5. exit" << endl;
+        cout << "\nEnter your choice (1-5) :";
+
+        char ch;
+        cin >> ch;
+        cout << endl;
+
+        switch (ch)
+        {
+            case '1':
+                {
+                    cout << "Enter a word: ";
+                    string word;
+                    cin >> word;
+                    obj.insert(word);
+                    break;
+                }
+            case '2':
+                {
+                    obj.inorder(obj.ROOT);
+                    break;
+                }
+            case '3':
+                {
+                    obj.preorder(obj.ROOT);
+                    break;
+                }
+            case '4':
+                {
+                    obj.postorder(obj.ROOT);
+                    break;
+                }
+            case '5':
+                return 0;
+        default:
+                {
+                cout <<"Invalid option" << endl;
+               break;
+                } 
+                }
+             }
+    
+    }
